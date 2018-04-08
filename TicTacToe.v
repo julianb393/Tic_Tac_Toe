@@ -1,7 +1,7 @@
 /*
 Authors: Julian, Ruyin, Radu and Brian.
 Inspirations & works cited:
-1)	http://www.fpga4student.com/2017/06/tic-tac-toe-game-in-verilog-and-logisim.html
+1) http://www.fpga4student.com/2017/06/tic-tac-toe-game-in-verilog-and-logisim.html
 2) https://github.com/JuJuLY/TicTacToe-verilog
 */
 
@@ -450,6 +450,10 @@ module datapath(input clk, input resetn,
 	 end
 	 end
 
+/*
+	Lines 454 - 476 taken directly from link 2) (see above)
+	file name: TicTacToediff.v
+*/
 	 always@(posedge clk)
 	 begin
 	     if (!resetn) count <= 4'b0;
