@@ -1,8 +1,8 @@
 /*
 Authors: Julian, Ruyin, Radu and Brian.
 Inspirations & works cited:
--	http://www.fpga4student.com/2017/06/tic-tac-toe-game-in-verilog-and-logisim.html
-- https://github.com/OliviaRuyinZhang/TicTacToe-verilog
+1)	http://www.fpga4student.com/2017/06/tic-tac-toe-game-in-verilog-and-logisim.html
+2) https://github.com/JuJuLY/TicTacToe-verilog
 */
 
 
@@ -99,6 +99,7 @@ module TicTacToe
 		defparam VGA.RESOLUTION = "160x120";
 		defparam VGA.MONOCHROME = "FALSE";
 		defparam VGA.BITS_PER_COLOUR_CHANNEL = 1;
+		// File "grid2.mif" was taken from link 2) (see above).
 		defparam VGA.BACKGROUND_IMAGE = "grid2.mif";
 
 	// Put your code here. Your code should produce signals x,y,colour and writeEn/plot
