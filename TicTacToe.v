@@ -110,7 +110,7 @@ module TicTacToe
 	  datapath d0(CLOCK_50, resetn, ld_1, ld_2, countEn, legal1, legal2, SW[3:0], SW[7:4], x, y,colour, pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7, pos8);
 
 		wire [1:0] who;
-	  check_winner wd(pos0, pos1,pos2,pos3,pos4,pos5,pos6,pos7,pos8, who[1:0]);
+	  checkWinner cw(pos0, pos1,pos2,pos3,pos4,pos5,pos6,pos7,pos8, who[1:0]);
 
 		assign LEDG[7:6] = who[1:0];
 
@@ -160,47 +160,86 @@ module legalMove(input[3:0] player, input legalCheck,input [0:1] pos0, pos1, pos
 				else
 					legal <= 1'b0;
 				end
+
 	    	4'b0001: begin
-			  // pos1 <= 2'b1;
-			  legal <= 1'b0;
-			    end
-			4'b0010: begin
-			  // pos2 <= 1'b1;
-			  legal <= 1'b0;
+			  if(pos1 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
 				end
+
+			4'b0010: begin
+				if(pos2 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
+
 			4'b0011: begin
-			// pos3 <= 1'b1;
-			legal <= 1'b0;
+			if(pos3 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
 				end
 			4'b0100: begin
-			   // pos4 <= 1'b1;
-				legal <= 1'b0;
-			    end
+			   if(pos4 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
 			4'b0101: begin
-			  // pos5 <= 1'b1;
-			  legal <= 1'b0;
-			    end
+			  if(pos5 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
+
 			4'b0110: begin
-			 // pos6 <= 1'b1;
-			 legal <= 1'b0;
-			    end
+			 if(pos6 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
+
 			4'b0111: begin
-			  // pos7 <= 1'b1;
-			  legal <= 1'b0;
-			    end
+			  if(pos7 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
+
 			4'b1000: begin
-			  //pos8 <= 1'b1;
-			  legal <= 1'b0;
-			    end
+			  if(pos8 !== 2'b00) // is not empty
+					begin
+					legal <= 1'b1; // Not a legal move
+					end
+				else
+					legal <= 1'b0;
+				end
+
 			default legal <= 1'b0;
 		endcase
 		end
 		end
 
-	endmodule
+endmodule
 
-module control(input clk, input resetn, input load, input render, legal1, legal2,
-	             output reg ld_1, ld_2, light, countEn, writeEn);
+module control(input clk, input resetn, input load, input render, legal1, legal2, output reg [3:0] p1lights, output reg [3:0] p2lights,
+	             output reg ld_1, ld_2, countEn, writeEn);
 
 	 reg[5:0] current_state, next_state;
 
@@ -224,35 +263,35 @@ module control(input clk, input resetn, input load, input render, legal1, legal2
 
 	 always @(*)
 	   begin
+
 	     ld_1 = 1'b0;
 		  ld_2 = 1'b0;
-
 		  countEn = 1'b0;
 		  writeEn = 1'b0;
 
-		  light = 1'b0;
 
 		   case (current_state)
 
 				legal_x: begin
-					light = legal1;
-				end
+					p1lights <= 4'b1111;
+					end
 
 				RENDER_X: begin
 				ld_1 = 1'b1;
 				countEn = 1'b1;
 				writeEn = 1'b1;
+
 				end
 
 				legal_y: begin
-					light = legal2;
-				end
+					p2lights <= 4'b1111;
+					end
 
-				 RENDER_Y: begin
-				 	ld_2 = 1'b1;
-				   countEn = 1'b1;
-					 writeEn = 1'b1;
-					 end
+			 RENDER_Y: begin
+				ld_2 = 1'b1;
+				countEn = 1'b1;
+				 writeEn = 1'b1;
+				 end
 
 		  endcase
     end
@@ -431,7 +470,7 @@ module datapath(input clk, input resetn,
 	 end
 endmodule
 
-module check_winner(input [1:0] pos0, pos1, pos2, pos3,
+module checkWinner(input [1:0] pos0, pos1, pos2, pos3,
 	pos4, pos5, pos6, pos6 ,pos8,
 	output wire [1:0]who);
 
@@ -441,18 +480,18 @@ module check_winner(input [1:0] pos0, pos1, pos2, pos3,
 	//| 6 | 7 | 8 |
 
 	wire [1:0] who1, who2, who3, who4, who5, who6, who7, who8;
-	check_winner_helper u1(pos0, pos1, pos2, who1);// (0,1,2);
-	check_winner_helper u2(pos3, pos4, pos5, who2);// (3,4,5);
-	check_winner_helper u3(pos6, pos7, pos8, who3);// (6,7,8);
-	check_winner_helper u4(pos0, pos3, pos6, who4);// (0,3,6);
-	check_winner_helper u5(pos1, pos4, pos7, who5);// (1,4,7);
-	check_winner_helper u6(pos2, pos5, pos8, who6);// (2,5,8);
-	check_winner_helper u7(pos0, pos4, pos8, who7);// (0,4,8);
-	check_winner_helper u8(pos2, pos4, pos6, who8);// (2,4,6);
+	checkWinnerHelper u1(pos0, pos1, pos2, who1);// (0,1,2);
+	checkWinnerHelper u2(pos3, pos4, pos5, who2);// (3,4,5);
+	checkWinnerHelper u3(pos6, pos7, pos8, who3);// (6,7,8);
+	checkWinnerHelper u4(pos0, pos3, pos6, who4);// (0,3,6);
+	checkWinnerHelper u5(pos1, pos4, pos7, who5);// (1,4,7);
+	checkWinnerHelper u6(pos2, pos5, pos8, who6);// (2,5,8);
+	checkWinnerHelper u7(pos0, pos4, pos8, who7);// (0,4,8);
+	checkWinnerHelper u8(pos2, pos4, pos6, who8);// (2,4,6);
 	assign who = who1 | who2 | who3 | who4 | who5 | who6 | who7 | who8;
 endmodule
 
-module check_winner_helper(input [1:0] pos0,pos1,pos2,
+module checkWinnerHelper(input [1:0] pos0,pos1,pos2,
 	output wire [1:0]who);
 
 	wire winner;
