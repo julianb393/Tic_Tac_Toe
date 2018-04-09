@@ -22,9 +22,7 @@ module TicTacToe
 		VGA_SYNC_N,						//	VGA SYNC
 		VGA_R,   						//	VGA Red[9:0]
 		VGA_G,	 						//	VGA Green[9:0]
-		VGA_B,   						//	VGA Blue[9:0]
-		HEX0,
-		HEX1
+		VGA_B   						//	VGA Blue[9:0]
 	);
 
 
@@ -478,7 +476,7 @@ module datapath(input clk, input resetn,
 endmodule
 
 module checkWinner(input [1:0] pos0, pos1, pos2, pos3,
-	pos4, pos5, pos6, pos7, pos8,
+	pos4, pos5, pos6, pos6 ,pos8,
 	output wire [1:0]who);
 
 	// What the grid resembles.

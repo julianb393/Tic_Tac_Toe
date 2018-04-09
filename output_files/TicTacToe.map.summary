@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Wed Apr 04 19:21:05 2018
-Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
+Analysis & Synthesis Status : Successful - Sun Apr 08 22:41:32 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
 Revision Name : TicTacToe
 Top-level Entity Name : TicTacToe
 Family : Cyclone IV E
-Total logic elements : 272
-    Total combinational functions : 261
-    Dedicated logic registers : 85
-Total registers : 85
-Total pins : 84
+Total logic elements : 350
+    Total combinational functions : 339
+    Dedicated logic registers : 120
+Total registers : 120
+Total pins : 100
 Total virtual pins : 0
 Total memory bits : 57,600
 Embedded Multiplier 9-bit elements : 0
