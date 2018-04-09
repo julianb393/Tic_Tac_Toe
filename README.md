@@ -5,4 +5,4 @@
 
 Team: Julian Barker, Ruyin Zhang, Radu Laudat and Brian Liao
 
-Video: [click here](https://www.youtube.com/watch?v=TuKIpyul95M&feature=youtu.be)
+Video: [click here](https://youtu.be/z48PhWqzRQw)
