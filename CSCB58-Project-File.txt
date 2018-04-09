@@ -2,75 +2,66 @@ CSCB58 Project File: Winter 2018
 
 Team Member A
 -------------
-First Name: Ruyin
-Last Name: Zhang
+First Name: Ruyin
+Last Name: Zhang 
 Student Number: 1002005883
 UofT E-mail Address: ruyin.zhang@mail.utoronto.ca
 
 
-
 Team Member B
 -------------
-First Name: Radu
+First Name: Radu
 Last Name: Laudat
 Student Number: 1002394063
 UofT E-mail Address: radu.laudat@mail.utoronto.ca
 
-
-
-Team Member C (Optional)
+Team Member C
 -------------
-First Name: Julian
+First Name: Julian	
 Last Name: Barker
 Student Number: 1002428036
 UofT E-mail Address: julian.barker@mail.utoronto.ca
 
-
-
-Team Member D (Optional)
+Team Member D 
 -------------
-First Name: Brian
+First Name: Brian
 Last Name: Liao
 Student Number: 1002574038
 UofT E-mail Address: b.liao@mail.utoronto.ca
-
-
 
 Project Details
 ---------------
 Project Title: Tic-Tac-Toe
 
-Project Description: The computer will generate two vertical lines perpendicular
-to two horizontal lines on the screen, thereby forming a 3x3 grid. Two players
-will take turns putting Xs and Os into a square of their choice in the grid.
-The player who gets three Xs or three Os in a row first (horizontal, vertical
-or diagonal) wins the game.
+Project Description:   The computer will generate two vertical lines perpendicular to two horizontal lines on the screen, thereby forming a 3x3 grid. Two players will take turns putting red and green symbol into a square of their choice in the grid. The player who gets three red symbols or three green symbols in a row first (horizontal, vertical or diagonal) wins the game. When player1 wins the game, LEDG[6] will light up to announce the winner. When player2 wins, the LEDG[7] will go on. Players need to do illegal move checking before they load and draw a position to the grid. When a position that the player attempts to draw has been occupied, the LED light above SW[14] will light up as a warning. If the player proceed to draw the illegal position after warning, the game will see it as the player skip his/her current round. 
 
-Video URL: https://www.youtube.com/watch?v=TuKIpyul95M
+ What the grid resembles.
+	| 0 | 1 | 2 |
+	| 3 | 4 | 5 |
+	| 6 | 7 | 8 |
+
+Players use switches to indicate which position they want to mark on the grid in each round. Player1 uses SW[3:0]. Player2 uses SW[7:4].
+After having the correct switches to represent the position the player desire to mark, player shall do illegal check by flipping SW[14] up. If it’s a legal move, the player could then load the value in by flipping SW[17] and then draw the position to the screen using SW[16].  
+
+
+
+Video URL: https://youtu.be/z48PhWqzRQw
 
 Code URL (please upload a copy of this file to your repository at the end of the project as well, it will
-serve as a useful resource for future development): https://github.com/julianb393/Tic_Tac_Toe/blob/master/TicTacToe.v
-
+serve as a useful resource for future development):https://github.com/julianb393/Tic_Tac_Toe/blob/master/TicTacToe.v
 
 
 Proposal
 --------
+
 What do you plan to have completed by the end of the first lab session?:
-- We plan to be able to generate the tic tac toe game board (3x3 grid)
-on the monitor. Players then have the ability to put Xs or Os on the grid by flipping switches designated
-to be controlled for left, right, up, and down shifts followed by enter when their desired choice has been
-selected.
+- Be able to generate the background image of the game in .mif format and be able to draw something to the screen randomly using switches. 
 
 What do you plan to have completed by the end of the second lab session?:
-- Have a hex display on the DE2 board to keep track of the score for two players.
+- Have a counter to keep track of the time each player used in each round of game. 
 
-- Have another hex display to show the count down time for each player when they
-are making their choice during each round.
-
-What do you plan to have completed by the end of the third lab session?:
-- Have the monitor show which player wins at the end of the game. Allow the
-count down time for each player to be shorter depending on the difficulty level
-that the player selects.
+What do you plan to have completed by the end of the third lab session?
+- Players have the ability to put red or green on the grid by flipping the corresponding switches. LEDG[7] light up when player2 wins the game and LEDG[6] light up when player1 wins. 
 
 What is your backup plan if things don't work out as planned?
 
@@ -84,9 +75,10 @@ way to the end HEX display. If you succeed in doing this, the next iteration wil
 move your initial segment to the end segment at a much faster rate thus making
 the game more difficult and intense.
 
-What hardware will you need beyond the DE2 board
+What hardware will you need beyond the DE2 board?
 (be sure to e-mail Brian if it's anything beyond the basics to make sure there's enough to go around)
 All we need is an additional monitor with a VGA cable.
+- A VGA monitor. 
 
 
 
@@ -96,10 +88,9 @@ How does this project relate to the material covered in CSCB58?:
 
 - In order to display any drawings for the tic tac toe game to a monitor, we need to
 apply knowledge about data paths and VGA adapters.
-- When a player moves their Xs or Os left/right/up/down on the grid, we need to incorporate finite
+- When a player put their marker into the grid, we need to incorporate finite
 state machines and flip flops into our logic.
-- We need to use the knowledge we obtained while using 7 segment decoders to demonstrate scores for
-each player on the DE2 board.
+- When we detect a winner during the game, we need to use the logic gates we learned in this course. 
 - We will need to apply the knowledge we learned in building registers and counters to build the
 countdown timer for each player selection round in the game.
 
